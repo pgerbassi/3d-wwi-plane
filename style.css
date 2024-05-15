@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+
+/*
+*   colorWhite: #FFE86F
+*   colorBrown: #65250D
+    randomBlue: 285b96
+    colorBlue: 
+*/
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+.webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+}
+
+body {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    font-family: "Poetsen One", sans-serif;
+    background: #1C334A;
+    overflow:auto;
+    color: #FFE86F;
+}
+
+/*body.loaded {
+    overflow: auto;
+}*/ 
+
+section {
+    height: 100vh;
+    width: auto; /*100vw*/
+    position: relative;
+    scroll-snap-align: start;
+}
+
+section .container {
+    max-width: 1360px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: flex-start;
+}
+
+section.one .container {
+    grid-template-areas: 'content ..';
+}
+
+section.two .container {
+    grid-template-areas: '.. content';
+}
+
+.hero {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 50px;
+
+    grid-area: content;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 90px;
+    line-height: 100px;
+    font-weight: 700;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 70px;
+    display: block;
+    width: 100%;
+    font-family: inherit;
+}
+
+h2 span{
+    font-size: 50px;
+    display: block;
+    line-height: 60px;
+    width: 100%;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+p{
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 300;
+    width: 100%;
+    display: block;
+    margin-bottom: 40px;
+}
+
+button {
+    font-size: 40px;
+    margin-left: 40%;
+    font-family: "Poetsen One", sans-serif;
+    border: 3px solid #FFE86F;
+    color: #FFE86F;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-weight: 400;
+    background: #285b96;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button:hover{
+    background: #1C334A;
+    box-shadow: 1px 1px 20px #FFE86F;
+    transition: all 0.5s ease-in;
+}
+
+section.three h1{
+    color: #285b96;
+    font-size: 10vw;
+    text-shadow: 1px 1px 1200px #FFE86F,
+    1px 1px 10px #FFE86F ;
+}
