@@ -1,65 +1,13 @@
 
+
+let mixer;
+
 // Canvas
 const canvas = document.querySelector('canvas.webgl');
 
 // Scene
 const scene = new THREE.Scene()
 
-// Overlay
-/*const overlayGeometry = new THREE.PlaneGeometry(2,2,1,1);
-const overlayMaterial = new THREE.ShaderMaterial({
-    vertexShader:`
-        void main() {
-            gl_Position = vec4(position, 1.0);
-        }
-    `,
-    fragmentShader:`
-        uniform float uAlpha;
-        void main() {
-            gl_FragColor = vec4(0.0, 0.0, 0.0, uAlpha);
-        }
-    `,
-    uniforms: {
-        uAlpha: {
-            value: 1.0
-        }
-    },
-    transparent: true
-});
-const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial);
-scene.add(overlay); */
-
-// Loaders
-//const loadingBar = document.querySelector('.loading-bar');
-//const body = document.querySelector('body');
-
-/*
-const loadingManager = new THREE.LoadingManager(
-()=>{
-    window.setTimeout(()=>{
-        gsap.to(overlayMaterial.uniforms.uAlpha, {
-            duration: 3,
-            value: 0,
-            delay: 1
-        });
-
-        loadingBar.classList.add('ended');
-        body.classList.add('loaded');
-        loadingBar.style.transform = '';
-
-    }, 500)
-},
-(itemUrl, itemsLoaded, itemsTotal) => {
-    const progressRatio = itemsLoaded/itemsTotal
-    loadingBar.style.transform = `scalex(${progressRatio})`;
-},
-() => {
-    console.log('error');
-}
-);
-*/
-
-// Object Loader
 let plane = null;
 
 const loader = new THREE.GLTFLoader();//.setPath('models/donut/');
@@ -75,6 +23,11 @@ loader.load('./assets/plane/scene.gltf', (gltf)=>{
     plane.scale.set(radius, radius, radius);
     scene.add(plane);
 
+    // Acting
+    mixer = new THREE.AnimationMixer(plane);
+    mixer.clipAction(gltf.animations[0]).play();
+ 
+    tick();
 });
 
 
@@ -180,7 +133,8 @@ const tick = ()=>{
 
 
     if(!!plane){
-        plane.position.y = Math.sin(elapsedTime * 0.5) * 0.1 - 0.1;
+        mixer.update(deltaTime * 0.9);
+        plane.position.y = Math.sin(deltaTime * 0.5) * 0.1 - 0.1;
     }
 
     renderer.render(scene, camera);
